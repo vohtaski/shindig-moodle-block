@@ -88,6 +88,8 @@ class block_shindig extends block_base {
     
     
     function get_gadget_token() {
+      // TODO: token should be encoded properly for security reasons
+      
       // var token = ""+gadget.owner_id+":"+gadget.viewer_id+":"+gadget.gadget_id+
       // ":default:"+escape("http://"+gadget_url)+":"+gadget.gadget_id+":1";
         global $USER, $COURSE, $CFG;
