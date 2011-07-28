@@ -19,7 +19,6 @@
  * Form for editing OpenSocial block instances.
  *
  * @copyright 2011 Evgeny Bogdanov
- * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 class block_shindig_edit_form extends block_edit_form {

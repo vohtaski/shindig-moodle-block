@@ -7,6 +7,8 @@
  *
  * Note that you need to set your Shindig server URL in Site Administration
  * using the Settings->Site administration->Plugins->Blocks->OpenSocial gadget settings page
+ *
+ * @copyright 2011 Evgeny Bogdanov
  */
 
 class block_shindig extends block_base {
