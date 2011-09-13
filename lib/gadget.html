@@ -3,26 +3,26 @@
    * OpenSocial gadget rendering
    * By Evgeny Bogdanov
    */ 
-  var my = my || {};
+  var myBlock = myBlock || {};
 
   // gets the data and calls build for container
   // This container lays out and renders gadgets itself.
 
-  my.LayoutManager = function() {
+  myBlock.LayoutManager = function() {
     shindig.LayoutManager.call(this);
   };
 
-  my.LayoutManager.inherits(shindig.LayoutManager);
+  myBlock.LayoutManager.inherits(shindig.LayoutManager);
 
-  my.LayoutManager.prototype.getGadgetChrome = function(gadget) {
+  myBlock.LayoutManager.prototype.getGadgetChrome = function(gadget) {
     var chromeId = 'gadget-chrome-' + gadget.id;
     return chromeId ? document.getElementById(chromeId) : null;
   };
 
-  shindig.container.layoutManager = new my.LayoutManager();
+  shindig.container.layoutManager = new myBlock.LayoutManager();
   
   // build the container with a gadget
-  var buildGadget = function(parent,gadget_data,token,shindig_url,height){
+  var buildBlockGadget = function(parent,gadget_data,token,shindig_url,height){
 
     var gadget = shindig.container.createGadget(
         {specUrl: gadget_data.appUrl, height: height+'px', title: gadget_data.displayName,
@@ -63,7 +63,7 @@
 
      var parent = document.getElementById('gadget_'+'<?php echo $this->instance->id ?>');
      var height = <?php echo $this->get_gadget_height() ?>;
-     buildGadget(parent,my_gadget,token,shindig_url,height);
+     buildBlockGadget(parent,my_gadget,token,shindig_url,height);
   }, 1000);
 </script>
 

@@ -54,26 +54,27 @@ class block_shindig extends block_base {
       
       global $CFG,$DB;
       
-      // if $this->config->gadget_id from widgetspace_gadgets is defined
-      if (!$this->config->gadget_id || $this->config->gadget_id == 0) {
-        // if not, create it and save in blocks settings
-        $data = new stdClass;
-        $data->widgetspaceid = 0;
-        try{
-          // try to insert record into db
-          $this->config->gadget_id = $DB->insert_record('widgetspace_gadgets', $data);
-        } catch (Exception $e) {
-          // database does not exist, set $this->config->gadget_id to 0
-          $this->config->gadget_id = 0;
-        }
-        // update config with gadget_id
-        $this->instance_config_commit();          
-      }
-      
         $this->content = new stdClass; 
         if (!$this->config->gadgeturl) { // no gadget defined 
             $this->content->text = '<p>Turn editing on and then click the "edit" button above to add new gadget url.</p>'; 
-        } else {         
+        } else {        
+          
+          // if $this->config->gadget_id from widgetspace_gadgets is defined
+          if (!$this->config->gadget_id || $this->config->gadget_id == 0) {
+            // if not, create it and save in blocks settings
+            $data = new stdClass;
+            $data->widgetspaceid = 0;
+            try{
+              // try to insert record into db
+              $this->config->gadget_id = $DB->insert_record('widgetspace_gadgets', $data);
+            } catch (Exception $e) {
+              // database does not exist, set $this->config->gadget_id to 0
+              $this->config->gadget_id = 0;
+            }
+            // update config with gadget_id
+            $this->instance_config_commit();          
+          }
+           
           // get shindig script to build gadgets
           $output = '<script src="' . $this->get_shindig_url() . '/gadgets/js/shindig-container:rpc.js?c=1&debug=1&nocache=1" type="text/javascript" charset="utf-8"></script>';
         
@@ -125,7 +126,8 @@ class block_shindig extends block_base {
     function get_shindig_url() {
       global $CFG;
       
-      return $CFG->block_shindig_url;
+      return "http://iamac71.epfl.ch:8080";
+      // return $CFG->block_shindig_url;
     }
     
     function get_gadget_height() {
