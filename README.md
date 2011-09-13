@@ -7,6 +7,7 @@ Requirements
 ============
 * Moodle 2.1 (was not checked on previous versions!)
 * Apache Shindig 2.0
+* For OpenSocial APIs - installation of [another moodle plugin for OpenSocial Gadgets](https://github.com/vohtaski/shindig-moodle-mod)
 
 Installation and Settings
 =========================
@@ -23,7 +24,7 @@ Settings->Site administration->Plugins->Blocks->OpenSocial gadget
 
 1. If you only want to render gadgets, you can specify any existing shindig installation
 in the cloud.
-2. The best way is to use Apache Shindig extended with Spaces. this way you also support OpenSocial APIs. For this, please use the shindig that comes with [another moodle plugin for OpenSocial Gadgets](https://github.com/vohtaski/shindig-moodle-mod). See installation instructions there. 
+2. The best way is to use Apache Shindig extended with Spaces. this way you also support OpenSocial APIs. For this, please install [another moodle plugin for OpenSocial Gadgets](https://github.com/vohtaski/shindig-moodle-mod) and use the shindig that comes with it. See installation instructions there. 
 
 Settings per gadget
 -------------------

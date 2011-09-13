@@ -52,7 +52,24 @@ class block_shindig extends block_base {
       // http://graaasp.epfl.ch/gadget/demo/pad3d_ext/gadget.xml
       // http://iamac71.epfl.ch/viewer.xml
       
-      global $CFG;
+      global $CFG,$DB;
+      
+      // if $this->config->gadget_id from widgetspace_gadgets is defined
+      if (!$this->config->gadget_id || $this->config->gadget_id == 0) {
+        // if not, create it and save in blocks settings
+        $data = new stdClass;
+        $data->widgetspaceid = 0;
+        try{
+          // try to insert record into db
+          $this->config->gadget_id = $DB->insert_record('widgetspace_gadgets', $data);
+        } catch (Exception $e) {
+          // database does not exist, set $this->config->gadget_id to 0
+          $this->config->gadget_id = 0;
+        }
+        // update config with gadget_id
+        $this->instance_config_commit();          
+      }
+      
         $this->content = new stdClass; 
         if (!$this->config->gadgeturl) { // no gadget defined 
             $this->content->text = '<p>Turn editing on and then click the "edit" button above to add new gadget url.</p>'; 
@@ -68,7 +85,7 @@ class block_shindig extends block_base {
         
           $this->content->footer = ""; //$this->instance->id;
         }     
-
+        // print($this->page->id);
         return $this->content;
     }    
 
@@ -83,11 +100,6 @@ class block_shindig extends block_base {
       return true;
     }
     
-    // Unfortunately, called before we know the widget's actual width
-    function preferred_width() {
-      return 320;
-    }
-    
     
     function get_gadget_token() {
       // TODO: token should be encoded properly for security reasons
@@ -97,12 +109,14 @@ class block_shindig extends block_base {
         global $USER, $COURSE, $CFG;
         
         $token = "";
-        $token.= $USER->id.":"; // owner_id
+        // owner of a gadget is the current course, we use prefix for spaces extension
+        $token.= "s_".$COURSE->id.":"; // context
         $token.= $USER->id.":"; // viewer_id
-        $token.= $this->instance->id.":"; // module_id
+        // gadget id is saved in widgetspace_gadgets table to avoid problem with appdata
+        $token.= $this->config->gadget_id.":"; 
         $token.= "default:";
         $token.= urlencode($this->config->gadgeturl) . ":"; // escape("http://"+gadget_url)
-        $token.= $this->instance->id.":"; // module_id
+        $token.= $this->config->gadget_id.":"; // gadget id is saved in widgetspace_gadgets table
         $token.= "1"; 
                 
         return $token;
