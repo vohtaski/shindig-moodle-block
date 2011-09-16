@@ -36,6 +36,8 @@
     parent.appendChild(gadget_el);    
 
     gadget.setServerBase(shindig_url+"/gadgets/");
+    // rewrite title generator (no title for blocks)
+    gadget.getTitleBarContent = function(continuation) { continuation('');};
     shindig.container.setView("home");
     shindig.container.setParentUrl("http://"+location.host);
     
