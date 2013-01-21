@@ -51,3 +51,10 @@ Moodle block plugin - GPL
     //
     // You should have received a copy of the GNU General Public License
     // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+
+Acknowledgments
+================
+This plugin has been initially developed by "Evgeny Bogdanov" in his capacity as an employee
+of the Swiss Federal Institute of Technology in Lausanne (EPFL) with the partial support of 
+the 6th and 7th Framework Programs for Research and Technological Development of the European 
+Union in Information and Communication Technologies (ROLE Project).
